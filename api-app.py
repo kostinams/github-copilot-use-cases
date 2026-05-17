@@ -1,3 +1,4 @@
+from threading import Lock
 from typing import List
 
 import uvicorn
@@ -32,6 +33,7 @@ items: List[Item] = [
     Item(id=9, name="Skyline Coaster Set", description="Coasters that stack into a miniature city skyline."),
     Item(id=10, name="Tide Speaker", description="A portable speaker with ambient ocean sound presets."),
 ]
+items_lock = Lock()
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
@@ -45,16 +47,18 @@ def health_check() -> dict:
 def get_items() -> List[Item]:
     """Retrieve all items from memory."""
 
-    return items
+    with items_lock:
+        return list(items)
 
 
 @app.get("/items/{item_id}", response_model=Item, status_code=status.HTTP_200_OK)
 def get_item(item_id: int) -> Item:
     """Retrieve a single item by its identifier."""
 
-    for item in items:
-        if item.id == item_id:
-            return item
+    with items_lock:
+        for item in items:
+            if item.id == item_id:
+                return item
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
 
@@ -62,21 +66,27 @@ def get_item(item_id: int) -> Item:
 def create_item(item: ItemCreate) -> Item:
     """Create a new item and assign a new identifier."""
 
-    next_id = max((existing_item.id for existing_item in items), default=0) + 1
-    new_item = Item(id=next_id, name=item.name, description=item.description)
-    items.append(new_item)
-    return new_item
+    with items_lock:
+        next_id = max((existing_item.id for existing_item in items), default=0) + 1
+        new_item = Item(id=next_id, name=item.name, description=item.description)
+        items.append(new_item)
+        return new_item
 
 
 @app.put("/items/{item_id}", response_model=Item, status_code=status.HTTP_200_OK)
 def update_item(item_id: int, item: ItemCreate) -> Item:
     """Update an existing item by its identifier."""
 
-    for index, existing_item in enumerate(items):
-        if existing_item.id == item_id:
-            updated_item = Item(id=item_id, name=item.name, description=item.description)
-            items[index] = updated_item
-            return updated_item
+    with items_lock:
+        for index, existing_item in enumerate(items):
+            if existing_item.id == item_id:
+                updated_item = Item(
+                    id=item_id,
+                    name=item.name,
+                    description=item.description,
+                )
+                items[index] = updated_item
+                return updated_item
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
 
@@ -84,12 +94,13 @@ def update_item(item_id: int, item: ItemCreate) -> Item:
 def delete_item(item_id: int) -> None:
     """Delete an existing item by its identifier."""
 
-    for index, item in enumerate(items):
-        if item.id == item_id:
-            del items[index]
-            return None
+    with items_lock:
+        for index, item in enumerate(items):
+            if item.id == item_id:
+                items.pop(index)
+                return None
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="127.0.0.1", port=8080)
