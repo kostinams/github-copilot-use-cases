@@ -1,6 +1,6 @@
 """FastAPI CRUD app with an in-memory list data store."""
 
-from typing import List
+from threading import Lock
 
 from fastapi import FastAPI, HTTPException, Response, status
 from pydantic import BaseModel, Field
@@ -30,7 +30,7 @@ class Item(ItemBase):
 
 app = FastAPI(title="Creative Items API")
 
-items: List[Item] = [
+items: list[Item] = [
     Item(
         id=1,
         name="Nebula Notebook",
@@ -82,6 +82,7 @@ items: List[Item] = [
         description="A reusable sketchpad charged by sunlight.",
     ),
 ]
+items_lock = Lock()
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
@@ -90,10 +91,11 @@ def health_check() -> dict[str, str]:
     return {"message": "API is healthy"}
 
 
-@app.get("/items", response_model=List[Item], status_code=status.HTTP_200_OK)
-def get_items() -> List[Item]:
+@app.get("/items", response_model=list[Item], status_code=status.HTTP_200_OK)
+def get_items() -> list[Item]:
     """Return all items from the in-memory store."""
-    return items
+    with items_lock:
+        return list(items)
 
 
 @app.get(
@@ -103,10 +105,11 @@ def get_items() -> List[Item]:
 )
 def get_item_by_id(item_id: int) -> Item:
     """Return one item by its ID or raise 404 if not found."""
-    item = next(
-        (stored_item for stored_item in items if stored_item.id == item_id),
-        None,
-    )
+    with items_lock:
+        item = next(
+            (stored_item for stored_item in items if stored_item.id == item_id),
+            None,
+        )
     if item is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -118,20 +121,22 @@ def get_item_by_id(item_id: int) -> Item:
 @app.post("/items", response_model=Item, status_code=status.HTTP_201_CREATED)
 def create_item(payload: ItemCreate) -> Item:
     """Create a new item and return it."""
-    next_id = max((item.id for item in items), default=0) + 1
-    created_item = Item(id=next_id, **payload.model_dump())
-    items.append(created_item)
+    with items_lock:
+        next_id = max((item.id for item in items), default=0) + 1
+        created_item = Item(id=next_id, **payload.model_dump())
+        items.append(created_item)
     return created_item
 
 
 @app.put("/items/{item_id}", response_model=Item, status_code=status.HTTP_200_OK)
 def update_item(item_id: int, payload: ItemUpdate) -> Item:
     """Update an existing item by ID or raise 404 if not found."""
-    for index, stored_item in enumerate(items):
-        if stored_item.id == item_id:
-            updated_item = Item(id=item_id, **payload.model_dump())
-            items[index] = updated_item
-            return updated_item
+    with items_lock:
+        for index, stored_item in enumerate(items):
+            if stored_item.id == item_id:
+                updated_item = Item(id=item_id, **payload.model_dump())
+                items[index] = updated_item
+                return updated_item
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -142,10 +147,11 @@ def update_item(item_id: int, payload: ItemUpdate) -> Item:
 @app.delete("/items/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_item(item_id: int) -> Response:
     """Delete an item by ID or raise 404 if not found."""
-    for index, stored_item in enumerate(items):
-        if stored_item.id == item_id:
-            items.pop(index)
-            return Response(status_code=status.HTTP_204_NO_CONTENT)
+    with items_lock:
+        for index, stored_item in enumerate(items):
+            if stored_item.id == item_id:
+                items.pop(index)
+                return Response(status_code=status.HTTP_204_NO_CONTENT)
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -154,4 +160,4 @@ def delete_item(item_id: int) -> Response:
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080, reload=False)
+    uvicorn.run(app, host="127.0.0.1", port=8080, reload=False)
