@@ -1,0 +1,90 @@
+- application [ref=e2]:
+  - generic:
+    - generic:
+      - img
+      - heading [level=1]: GitHub Copilot
+      - heading [level=3]: Agentic Engineering
+      - paragraph: Your AI Pair Programmer
+    - generic:
+      - generic:
+        - heading [level=2]: Copilot Capabilities
+        - paragraph:
+          - generic: Press ↓ to explore all capabilities
+      - generic:
+        - heading [level=3]: Core Development
+        - generic:
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Explanation
+            - paragraph: Understand complex code with detailed explanations
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Generation
+            - paragraph: Generate code from natural language descriptions
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Refactoring
+            - paragraph: Improve code structure and maintainability
+          - generic:
+            - generic: 
+            - heading [level=6]: Bug Fixing
+            - paragraph: Identify and fix bugs efficiently
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Translation
+            - paragraph: Convert code between programming languages
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Formatting
+            - paragraph: Maintain consistent code style
+      - text:                    
+    - generic [ref=e31]:
+      - heading "GHCP Modes" [level=2] [ref=e32]
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: 
+          - heading "Agent" [level=5] [ref=e36]
+          - paragraph [ref=e37]: Autonomous problem-solving with multi-step task execution and tool usage
+        - generic [ref=e38]:
+          - generic [ref=e39]: 
+          - heading "Plan" [level=5] [ref=e40]
+          - paragraph [ref=e41]: Strategic planning and architecture design before implementation
+        - generic [ref=e42]:
+          - generic [ref=e43]: 
+          - heading "Ask" [level=5] [ref=e44]
+          - paragraph [ref=e45]: Quick answers and guidance for development questions
+    - generic:
+      - heading [level=2]: GHCP Handoffs
+      - generic:
+        - generic:
+          - generic: 
+          - heading [level=6]: Local
+          - paragraph: (IDE)
+          - paragraph: Direct integration within your development environment for instant assistance
+        - generic:
+          - generic: 
+          - heading [level=6]: Background
+          - paragraph: (GHCP CLI)
+          - paragraph: Command-line interface for automated workflows and background tasks
+        - generic:
+          - generic: 
+          - heading [level=6]: Cloud
+          - paragraph: (Coding Agent)
+          - paragraph: Cloud-based autonomous coding agent for complex multi-step tasks
+        - generic:
+          - generic: 
+          - heading [level=6]: Claude SDK
+          - paragraph: (Claude Code)
+          - paragraph: Programmatic access via SDK for custom integrations and workflows
+    - generic:
+      - generic:
+        - heading [level=2]: GHCP Models
+        - paragraph:
+          - generic: Press ↓ to explore models by provider
+  - link "3" [ref=e50] [cursor=pointer]:
+    - /url: "#/2"
+  - complementary:
+    - button "previous slide" [ref=e26] [cursor=pointer]
+    - button "next slide" [ref=e15] [cursor=pointer]
+  - text: Speaker notes
+  - generic [ref=e18]: GHCP Modes Agent Autonomous problem-solving with multi-step task execution and tool usage Plan Strategic planning and architecture design before implementation Ask Quick answers and guidance for development questions

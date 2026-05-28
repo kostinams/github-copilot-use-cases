@@ -1,0 +1,124 @@
+- application [ref=e2]:
+  - generic:
+    - text:                                 
+    - generic:
+      - heading [level=2]: Consuming API Directly
+      - generic:
+        - generic:
+          - img:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: 💻 REST API
+                - generic:
+                  - generic:
+                    - paragraph: HTTP GET /users
+                - generic:
+                  - generic:
+                    - paragraph: HTTP POST /orders
+                - generic:
+                  - generic:
+                    - paragraph: HTTP GET /products
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: 💻 Client Application
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: GET /users
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: POST /orders
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: GET /products
+            - generic:
+              - generic: Syntax error in text
+              - generic: mermaid version 11.14.0
+    - generic:
+      - heading [level=2]: Consuming API via MCP
+      - generic:
+        - generic:
+          - img:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: 🌐 REST API
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: 🤖 MCP
+                - generic:
+                  - generic:
+                    - paragraph: Natural Language / Tool Call
+                - generic:
+                  - generic:
+                    - paragraph: Natural Language / Tool Call
+                - generic:
+                  - generic:
+                    - paragraph: Natural Language / Tool Call
+                - generic:
+                  - generic:
+                    - paragraph: HTTP GET /users
+                - generic:
+                  - generic:
+                    - paragraph: HTTP POST /orders
+                - generic:
+                  - generic:
+                    - paragraph: HTTP GET /products
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: 💻 Client Application
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: "Tool: get_users()"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: "Tool: create_order()"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: "Tool: get_products()"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: GET /users
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: POST /orders
+                  - generic:
+                    - generic:
+                      - generic:
+                        - paragraph: GET /products
+            - generic:
+              - generic: Syntax error in text
+              - generic: mermaid version 11.14.0
+    - generic [ref=e172]:
+      - heading "Demo Time!" [level=2] [ref=e173]
+      - paragraph [ref=e174]: Let's explore some use cases and examples
+      - paragraph [ref=e175]:
+        - img [ref=e176]
+      - paragraph [ref=e177]:
+        - link "github.com/hosseinzahed/github-copilot-use-cases" [ref=e178] [cursor=pointer]:
+          - /url: https://github.com/hosseinzahed/github-copilot-use-cases
+  - link "8" [ref=e179] [cursor=pointer]:
+    - /url: "#/7"
+  - complementary:
+    - button "previous slide" [ref=e26] [cursor=pointer]
+  - text: Speaker notes
+  - generic [ref=e18]: Demo Time! Let's explore some use cases and examples github.com/hosseinzahed/github-copilot-use-cases

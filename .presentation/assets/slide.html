@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Copilot Presentation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/theme/black.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .round-photo {
+        border-radius: 50%;
+        height: 200px;
+        border: 5px solid #fff;
+      }
+
+      .capabilities-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        padding: 10px;
+        text-align: left;
+      }
+
+      .capability-card {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 158, 255, 0.15),
+          rgba(255, 255, 255, 0.05)
+        );
+        border-radius: 8px;
+        padding: 15px;
+        border: 2px solid rgba(74, 158, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .capability-card:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 158, 255, 0.25),
+          rgba(255, 255, 255, 0.1)
+        );
+        border-color: rgba(74, 158, 255, 0.5);
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(74, 158, 255, 0.3);
+      }
+
+      .capability-card i {
+        font-size: 1em;
+        margin-bottom: 8px;
+        color: #4a9eff;
+      }
+
+      .capability-card h6 {
+        margin: 8px 0 4px 0;
+        font-size: 0.65em;
+      }
+
+      .capability-card p {
+        font-size: 0.5em;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .modes-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .mode-card {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 158, 255, 0.15),
+          rgba(255, 255, 255, 0.05)
+        );
+        border-radius: 8px;
+        padding: 20px 15px;
+        border: 2px solid rgba(74, 158, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .mode-card:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 158, 255, 0.25),
+          rgba(255, 255, 255, 0.1)
+        );
+        border-color: rgba(74, 158, 255, 0.5);
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(74, 158, 255, 0.3);
+      }
+
+      .mode-card i {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+        color: #4a9eff;
+        display: block;
+      }
+
+      .mode-card h4 {
+        margin: 10px 0 5px 0;
+        font-size: 1em;
+      }
+
+      .mode-card p {
+        font-size: 0.7em;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .handoffs-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .handoff-card {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 158, 255, 0.15),
+          rgba(255, 255, 255, 0.05)
+        );
+        border-radius: 8px;
+        padding: 20px 15px;
+        border: 2px solid rgba(74, 158, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .handoff-card:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 158, 255, 0.25),
+          rgba(255, 255, 255, 0.1)
+        );
+        border-color: rgba(74, 158, 255, 0.5);
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(74, 158, 255, 0.3);
+      }
+
+      .handoff-card i {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #4a9eff;
+        display: block;
+      }
+
+      .handoff-card h6 {
+        margin: 10px 0 5px 0;
+        font-size: 0.85em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .handoff-card p {
+        font-size: 0.65em;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.4;
+      }
+
+      .models-table {
+        font-size: 0.6em;
+        width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+      }
+
+      .models-table th {
+        background: linear-gradient(
+          135deg,
+          rgba(74, 158, 255, 0.3),
+          rgba(255, 255, 255, 0.1)
+        );
+        padding: 10px;
+        border: 1px solid rgba(74, 158, 255, 0.5);
+        text-align: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .models-table td {
+        padding: 8px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .models-table tr:hover td {
+        background: rgba(74, 158, 255, 0.15);
+      }
+
+      .provider-openai {
+        color: #10a37f;
+      }
+
+      .provider-anthropic {
+        color: #d4a574;
+      }
+
+      .provider-google {
+        color: #4285f4;
+      }
+
+      .provider-xai {
+        color: #ff6b6b;
+      }
+
+      .status-ga {
+        color: #4caf50;
+      }
+
+      .status-preview {
+        color: #ff9800;
+      }
+
+      .status-retiring {
+        color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Slide 1: About -->
+       
+
+        <!-- Slide 2: Title -->
+        <section>
+          <img
+            src="assets/ghcp-logo.png"
+            alt="GitHub Copilot Logo"
+            height="200"
+          />
+          <h1>GitHub Copilot</h1>
+          <h3>Agentic Engineering</h3>
+          <p>Your AI Pair Programmer</p>
+        </section>
+
+        <!-- Slide 3: Capabilities -->
+        <section>
+          <section>
+            <h2>Copilot Capabilities</h2>
+            <p><small>Press ↓ to explore all capabilities</small></p>
+          </section>
+
+          <section>
+            <h3>Core Development</h3>
+            <div class="capabilities-grid">
+              <div class="capability-card">
+                <i class="fas fa-book-open"></i>
+                <h6>Code Explanation</h6>
+                <p>Understand complex code with detailed explanations</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-code"></i>
+                <h6>Code Generation</h6>
+                <p>Generate code from natural language descriptions</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-recycle"></i>
+                <h6>Code Refactoring</h6>
+                <p>Improve code structure and maintainability</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-bug"></i>
+                <h6>Bug Fixing</h6>
+                <p>Identify and fix bugs efficiently</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-language"></i>
+                <h6>Code Translation</h6>
+                <p>Convert code between programming languages</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-align-left"></i>
+                <h6>Code Formatting</h6>
+                <p>Maintain consistent code style</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Quality & Security</h3>
+            <div class="capabilities-grid">
+              <div class="capability-card">
+                <i class="fas fa-file-alt"></i>
+                <h6>Document Generation</h6>
+                <p>Create comprehensive documentation automatically</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-vial"></i>
+                <h6>Test Generation</h6>
+                <p>Generate unit and integration tests</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-shield-alt"></i>
+                <h6>Security Detection</h6>
+                <p>Identify and fix security vulnerabilities</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-tachometer-alt"></i>
+                <h6>Performance Optimization</h6>
+                <p>Optimize code for better performance</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-compass"></i>
+                <h6>Code Navigation</h6>
+                <p>Navigate large codebases efficiently</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>DevOps & Infrastructure</h3>
+            <div class="capabilities-grid">
+              <div class="capability-card">
+                <i class="fas fa-project-diagram"></i>
+                <h6>Workflow Generation</h6>
+                <p>Create CI/CD and automation workflows</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-server"></i>
+                <h6>Infrastructure as Code</h6>
+                <p>Generate infrastructure configurations</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-terminal"></i>
+                <h6>Terminal Chat</h6>
+                <p>Interact with Copilot in the terminal</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-globe"></i>
+                <h6>Fetch URL</h6>
+                <p>Retrieve and process web content</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Advanced Features</h3>
+            <div class="capabilities-grid">
+              <div class="capability-card">
+                <i class="fas fa-plug"></i>
+                <h6>MCP Integration</h6>
+                <p>Model Context Protocol support</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-puzzle-piece"></i>
+                <h6>Extensions</h6>
+                <p>Extend functionality with custom extensions</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-robot"></i>
+                <h6>Custom Agents</h6>
+                <p>Build intelligent AI-powered agents</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-cube"></i>
+                <h6>Copilot SDK</h6>
+                <p>Integrate Copilot via SDK</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-laptop-code"></i>
+                <h6>Interactive Development</h6>
+                <p>Real-time interactive coding assistance</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-cogs"></i>
+                <h6>Agentic Workflows</h6>
+                <p>Automated workflows, AI-Powered decisions, Continuous AI</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Customization</h3>
+            <div class="capabilities-grid">
+              <div class="capability-card">
+                <i class="fas fa-sliders-h"></i>
+                <h6>Custom Instructions</h6>
+                <p>Personalize Copilot behavior</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-robot"></i>
+                <h6>Custom Agents</h6>
+                <p>Create specialized AI agents</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-comment-dots"></i>
+                <h6>Custom Prompts</h6>
+                <p>Design effective prompts</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-sitemap"></i>
+                <h6>Plan Mode</h6>
+                <p>Strategic code planning and architecture</p>
+              </div>
+              <div class="capability-card">
+                <i class="fas fa-toolbox"></i>
+                <h6>Agent Skills</h6>
+                <p>Develop and use agent capabilities</p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Slide 4: Copilot Modes -->
+        <section>
+          <h2>GHCP Modes</h2>
+          <div class="modes-grid">
+            <div class="mode-card">
+              <i class="fas fa-robot"></i>
+              <h5>Agent</h5>
+              <p>
+                Autonomous problem-solving with multi-step task execution and
+                tool usage
+              </p>
+            </div>
+
+            <div class="mode-card">
+              <i class="fas fa-sitemap"></i>
+              <h5>Plan</h5>
+              <p>
+                Strategic planning and architecture design before implementation
+              </p>
+            </div>
+
+            <div class="mode-card">
+              <i class="fas fa-question-circle"></i>
+              <h5>Ask</h5>
+              <p>Quick answers and guidance for development questions</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 5: GHCP Handoffs -->
+        <section>
+          <h2>GHCP Handoffs</h2>
+          <div class="handoffs-grid">
+            <div class="handoff-card">
+              <i class="fas fa-laptop-code"></i>
+              <h6>Local</h6>
+              <p>(IDE)</p>
+              <p>
+                Direct integration within your development environment for
+                instant assistance
+              </p>
+            </div>
+
+            <div class="handoff-card">
+              <i class="fas fa-terminal"></i>
+              <h6>Background</h6>
+              <p>(GHCP CLI)</p>
+              <p>
+                Command-line interface for automated workflows and background
+                tasks
+              </p>
+            </div>
+
+            <div class="handoff-card">
+              <i class="fas fa-cloud"></i>
+              <h6>Cloud</h6>
+              <p>(Coding Agent)</p>
+              <p>
+                Cloud-based autonomous coding agent for complex multi-step tasks
+              </p>
+            </div>
+
+            <div class="handoff-card">
+              <i class="fas fa-cube"></i>
+              <h6>Claude SDK</h6>
+              <p>(Claude Code)</p>
+              <p>
+                Programmatic access via SDK for custom integrations and
+                workflows
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 6: GHCP Models -->
+        <section>
+          <section>
+            <h2>GHCP Models</h2>
+            <p><small>Press ↓ to explore models by provider</small></p>
+          </section>
+
+          <section>
+            <h3>OpenAI Models</h3>
+            <table class="models-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Status</th>
+                  <th>Multiplier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>GPT-4.1</td>
+                  <td class="status-ga">GA</td>
+                  <td>0x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5</td>
+                  <td class="status-retiring">Retiring 2026-02-17</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5 mini</td>
+                  <td class="status-ga">GA</td>
+                  <td>0x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.1</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.1-Codex</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.1-Codex-Mini</td>
+                  <td class="status-preview">Public Preview</td>
+                  <td>0.33x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.1-Codex-Max</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.2</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.2-Codex</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.3-Codex</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>Raptor mini</td>
+                  <td class="status-preview">Public Preview</td>
+                  <td>0x</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h3>Anthropic Claude Models</h3>
+            <table class="models-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Status</th>
+                  <th>Multiplier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Claude Haiku 4.5</td>
+                  <td class="status-ga">GA</td>
+                  <td>0.33x</td>
+                </tr>
+                <tr>
+                  <td>Claude Opus 4.1</td>
+                  <td class="status-retiring">Retiring 2026-02-17</td>
+                  <td>10x</td>
+                </tr>
+                <tr>
+                  <td>Claude Opus 4.5</td>
+                  <td class="status-ga">GA</td>
+                  <td>3x</td>
+                </tr>
+                <tr>
+                  <td>Claude Opus 4.6</td>
+                  <td class="status-ga">GA</td>
+                  <td>3x</td>
+                </tr>
+                <tr>
+                  <td>Claude Opus 4.6 (fast mode)</td>
+                  <td class="status-preview">Public Preview</td>
+                  <td>9x (promo)</td>
+                </tr>
+                <tr>
+                  <td>Claude Sonnet 4</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>Claude Sonnet 4.5</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section>
+            <h3>Google & xAI Models</h3>
+            <table class="models-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Provider</th>
+                  <th>Status</th>
+                  <th>Multiplier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Gemini 2.5 Pro</td>
+                  <td class="provider-google">Google</td>
+                  <td class="status-ga">GA</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>Gemini 3 Flash</td>
+                  <td class="provider-google">Google</td>
+                  <td class="status-preview">Public Preview</td>
+                  <td>0.33x</td>
+                </tr>
+                <tr>
+                  <td>Gemini 3 Pro</td>
+                  <td class="provider-google">Google</td>
+                  <td class="status-preview">Public Preview</td>
+                  <td>1x</td>
+                </tr>
+                <tr>
+                  <td>Grok Code Fast 1</td>
+                  <td class="provider-xai">xAI</td>
+                  <td class="status-ga">GA</td>
+                  <td>0.25x</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- Slide 7: API Direct Consumer Diagram -->
+        <section>
+          <h2>Consuming API Directly</h2>
+          <div class="mermaid" style="font-size: 0.75em;">
+            flowchart LR
+              Client(["&#128187; Client Application"])
+
+              subgraph API[" &#128187; REST API "]
+                direction TB
+                E1["GET /users"]
+                E2["POST /orders"]
+                E3["GET /products"]
+              end
+
+              Client -- "HTTP GET /users" --> E1
+              Client -- "HTTP POST /orders" --> E2
+              Client -- "HTTP GET /products" --> E3
+              
+              style E1 fill:#1e3a5f,color:#fff,stroke:#4a9eff
+              style E2 fill:#1e3a5f,color:#fff,stroke:#4a9eff
+              style E3 fill:#1e3a5f,color:#fff,stroke:#4a9eff
+          </div>
+        </section>
+
+        <!-- Slide 8: API via MCP -->
+        <section>
+          <h2>Consuming API via MCP</h2>
+          <div class="mermaid" style="font-size: 0.75em;">
+            flowchart LR
+              Client(["💻 Client Application"])
+
+              subgraph MCP["🤖 MCP"]
+                direction TB
+                T1["Tool: get_users()"]
+                T2["Tool: create_order()"]
+                T3["Tool: get_products()"]
+              end
+
+              subgraph API["🌐 REST API"]
+                direction TB
+                E1["GET /users"]
+                E2["POST /orders"]
+                E3["GET /products"]
+              end
+
+              Client -- "Natural Language / Tool Call" --> T1
+              Client -- "Natural Language / Tool Call" --> T2
+              Client -- "Natural Language / Tool Call" --> T3
+
+              T1 -- "HTTP GET /users" --> E1
+              T2 -- "HTTP POST /orders" --> E2
+              T3 -- "HTTP GET /products" --> E3
+
+              style T1 fill:#2d6a4f,color:#fff,stroke:#52b788
+              style T2 fill:#2d6a4f,color:#fff,stroke:#52b788
+              style T3 fill:#2d6a4f,color:#fff,stroke:#52b788
+              style E1 fill:#1e3a5f,color:#fff,stroke:#4a9eff
+              style E2 fill:#1e3a5f,color:#fff,stroke:#4a9eff
+              style E3 fill:#1e3a5f,color:#fff,stroke:#4a9eff
+          </div>
+        </section>
+
+        <!-- Slide 9: Thank You -->
+        <section>
+          <h2>Demo Time!</h2>
+          <p>Let's explore some use cases and examples</p>
+          <p>
+            <img src="assets/repo-qr.png" width="300px"/>
+          </p>
+          <p>
+            <a
+              href="https://github.com/hosseinzahed/github-copilot-use-cases"
+              target="_blank"
+              style="font-size: 0.8em"
+            >
+              github.com/hosseinzahed/github-copilot-use-cases              
+            </a>
+            
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script>
+      // Initialize Reveal.js
+      mermaid.initialize({ startOnLoad: false, theme: "dark" });
+
+      Reveal.initialize({
+        hash: true,
+        transition: "slide", // none/fade/slide/convex/concave/zoom
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        keyboard: true,
+        overview: true,
+        touch: true,
+        loop: false,
+        fragments: true,
+      });
+
+      Reveal.on("slidechanged", function () {
+        mermaid.run({ querySelector: ".mermaid" });
+      });
+
+      Reveal.on("ready", function () {
+        mermaid.run({ querySelector: ".mermaid" });
+      });
+    </script>
+  </body>
+</html>

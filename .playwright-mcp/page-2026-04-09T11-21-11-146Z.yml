@@ -1,0 +1,62 @@
+- application [ref=e2]:
+  - generic:
+    - generic [ref=e3]:
+      - img "GitHub Copilot Logo" [ref=e4]
+      - heading "GitHub Copilot" [level=1] [ref=e5]
+      - heading "Agentic Engineering" [level=3] [ref=e6]
+      - paragraph [ref=e7]: Your AI Pair Programmer
+    - generic:
+      - generic:
+        - heading [level=2]: Copilot Capabilities
+        - paragraph:
+          - generic: Press ↓ to explore all capabilities
+      - generic:
+        - heading [level=3]: Core Development
+        - generic:
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Explanation
+            - paragraph: Understand complex code with detailed explanations
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Generation
+            - paragraph: Generate code from natural language descriptions
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Refactoring
+            - paragraph: Improve code structure and maintainability
+          - generic:
+            - generic: 
+            - heading [level=6]: Bug Fixing
+            - paragraph: Identify and fix bugs efficiently
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Translation
+            - paragraph: Convert code between programming languages
+          - generic:
+            - generic: 
+            - heading [level=6]: Code Formatting
+            - paragraph: Maintain consistent code style
+      - text:                    
+    - generic:
+      - heading [level=2]: GHCP Modes
+      - generic:
+        - generic:
+          - generic: 
+          - heading [level=5]: Agent
+          - paragraph: Autonomous problem-solving with multi-step task execution and tool usage
+        - generic:
+          - generic: 
+          - heading [level=5]: Plan
+          - paragraph: Strategic planning and architecture design before implementation
+        - generic:
+          - generic: 
+          - heading [level=5]: Ask
+          - paragraph: Quick answers and guidance for development questions
+    - text:    
+  - link "1" [ref=e14] [cursor=pointer]:
+    - /url: "#/"
+  - complementary:
+    - button "next slide" [ref=e15] [cursor=pointer]
+  - text: Speaker notes
+  - generic [ref=e18]: GitHub Copilot Agentic Engineering Your AI Pair Programmer

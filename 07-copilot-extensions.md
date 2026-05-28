@@ -6,7 +6,7 @@
 - Ask your questions about different Azure resources
 
 ### Prompt 1 in Ask:
-@azure list all resource groups
+@azure What was my most expensive resource last month?
 
 ### Prompt 2 in Ask:
 @azure list all resources under rg-ai-demo-hz

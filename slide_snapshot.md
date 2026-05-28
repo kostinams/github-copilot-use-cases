@@ -1,0 +1,37 @@
+- application [ref=e2]:
+  - generic:
+    - generic [ref=e3]:
+      - img [ref=e4]
+      - heading "Hossein Zahed" [level=2] [ref=e5]
+      - heading "Sr. Solution Engineer" [level=5] [ref=e6]
+      - heading "Cloud & AI @ Microsoft" [level=6] [ref=e7]
+      - heading " hosseinzahed" [level=6] [ref=e8]:
+        - generic [ref=e9]: 
+        - link "hosseinzahed" [ref=e10] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/hosseinzahed
+      - heading " hosseinzahed" [level=6] [ref=e11]:
+        - generic [ref=e12]: 
+        - link "hosseinzahed" [ref=e13] [cursor=pointer]:
+          - /url: https://github.com/hosseinzahed
+      - heading "www.hossein.dk" [level=6] [ref=e14]:
+        - link "www.hossein.dk" [ref=e15] [cursor=pointer]:
+          - /url: https://hossein.dk
+      - img "LinkedIn QR Code" [ref=e16]
+    - generic:
+      - img
+      - heading [level=1]: GitHub Copilot
+      - heading [level=3]: Agentic Engineering
+      - paragraph: Your AI Pair Programmer
+    - generic:
+      - generic:
+        - heading [level=2]: Copilot Capabilities
+        - paragraph:
+          - generic: Press ↓ to explore all capabilities
+      - text:                          
+    - text:       
+  - link "1" [ref=e23] [cursor=pointer]:
+    - /url: "#/"
+  - complementary:
+    - button "next slide" [ref=e24] [cursor=pointer]
+  - text: Speaker notes
+  - generic [ref=e27]: Hossein Zahed Sr. Solution Engineer Cloud & AI @ Microsoft hosseinzahed hosseinzahed www.hossein.dk
